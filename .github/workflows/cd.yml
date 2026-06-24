@@ -36,9 +36,9 @@ jobs:
           minor=$(echo $version | cut -d. -f2)
           patch=$(echo $version | cut -d. -f3)
           commits=$(git log $latest..HEAD --pretty=format:"%s")
-          if echo "$commits" | grep -q '\[major\]'; then
+          if echo "$commits" | grep -iq '\[major\]'; then
             new_tag="v$((major + 1)).0.0"
-          elif echo "$commits" | grep -q '\[minor\]'; then
+          elif echo "$commits" | grep -iq '\[minor\]'; then
             new_tag="v${major}.$((minor + 1)).0"
           else
             new_tag="v${major}.${minor}.$((patch + 1))"
